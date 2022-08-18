@@ -37,10 +37,10 @@ public class CourseController {
             @RequestParam(name = "age",required = false) Integer age
 
     ){
-        if(age != null && town != null){
-            return new ResponseEntity<>(customerRepository.findCustomerByBookingsCourseIdAndTownIgnoreCaseAndAgeGreaterThan(id,town,age),HttpStatus.OK);
-        }
         if(town != null){
+            if(age != null){
+                return new ResponseEntity<>(customerRepository.findCustomerByBookingsCourseIdAndTownIgnoreCaseAndAgeGreaterThan(id,town,age),HttpStatus.OK);
+            }
             return new ResponseEntity<>(customerRepository.findCustomerByBookingsCourseIdAndTownIgnoreCase(id,town),HttpStatus.OK);
         }
         return new ResponseEntity<>(customerRepository.findCustomerByBookingsCourseId(id),HttpStatus.OK);

@@ -18,7 +18,7 @@ public class Course {
     @Column(name = "rating")
     private int rating;
     @JsonIgnoreProperties("{course}")
-    @OneToMany(mappedBy = "course")
+    @OneToMany(mappedBy = "course", fetch = FetchType.LAZY)
     private List<Booking> bookings;
 
     public Course(String name, String town, int rating) {

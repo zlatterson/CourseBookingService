@@ -1,6 +1,7 @@
 package com.example.CourseBooking.controllers;
 
 import com.example.CourseBooking.models.Course;
+import com.example.CourseBooking.models.Customer;
 import com.example.CourseBooking.repositories.CourseRepository;
 import com.example.CourseBooking.repositories.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;

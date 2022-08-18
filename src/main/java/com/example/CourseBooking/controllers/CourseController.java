@@ -31,7 +31,13 @@ public class CourseController {
         return new ResponseEntity<>(courseRepository.findAll(), HttpStatus.OK);
     }
     @GetMapping(value = "/courses/{id}/customers")
-    public ResponseEntity<List<Customer>> getCourseCustomers(@PathVariable Long id){
+    public ResponseEntity<List<Customer>> getCourseCustomers(
+            @PathVariable Long id,
+            @RequestParam(name = "town",required = false) String town
+    ){
+        if(town != null){
+            return new ResponseEntity<>(customerRepository.findCustomerByBookingsCourseIdAndTown(id,town),HttpStatus.OK);
+        }
         return new ResponseEntity<>(customerRepository.findCustomerByBookingsCourseId(id),HttpStatus.OK);
     }
 }

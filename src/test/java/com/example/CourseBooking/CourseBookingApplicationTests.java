@@ -37,13 +37,18 @@ class CourseBookingApplicationTests {
 	}
 	@Test
 	void shouldGetAllCustomersInAGivenTownForAGivenCourse(){
-		List<Customer> customers = customerRepository.findCustomerByBookingsCourseIdAndTown(1L,"Dundee");
+		List<Customer> customers = customerRepository.findCustomerByBookingsCourseIdAndTownIgnoreCase(1L,"Dundee");
 		assertEquals(2,customers.size());
 	}
 	@Test
 	void shouldGetAllCustomersOverACertainAgeInAGivenTownForAGivenCourse(){
-		List<Customer> customers = customerRepository.findCustomerByBookingsCourseIdAndTownAndAgeGreaterThan(1L,"Dundee",30);
+		List<Customer> customers = customerRepository.findCustomerByBookingsCourseIdAndTownIgnoreCaseAndAgeGreaterThan(1L,"Dundee",30);
 		assertEquals(1, customers.size());
+	}
+	@Test
+	void shouldCorrectlyHandleCaseInsensitiveRoutes(){
+		List<Customer> customers = customerRepository.findCustomerByBookingsCourseIdAndTownIgnoreCaseAndAgeGreaterThan(1L,"dundee",20);
+		assertEquals(2, customers.size());
 	}
 
 

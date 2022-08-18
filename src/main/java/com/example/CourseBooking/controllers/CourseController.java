@@ -38,10 +38,10 @@ public class CourseController {
 
     ){
         if(age != null && town != null){
-            return new ResponseEntity<>(customerRepository.findCustomerByBookingsCourseIdAndTownAndAgeGreaterThan(id,town,age),HttpStatus.OK);
+            return new ResponseEntity<>(customerRepository.findCustomerByBookingsCourseIdAndTownIgnoreCaseAndAgeGreaterThan(id,town,age),HttpStatus.OK);
         }
         if(town != null){
-            return new ResponseEntity<>(customerRepository.findCustomerByBookingsCourseIdAndTown(id,town),HttpStatus.OK);
+            return new ResponseEntity<>(customerRepository.findCustomerByBookingsCourseIdAndTownIgnoreCase(id,town),HttpStatus.OK);
         }
         return new ResponseEntity<>(customerRepository.findCustomerByBookingsCourseId(id),HttpStatus.OK);
     }

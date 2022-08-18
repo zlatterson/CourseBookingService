@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 @SpringBootTest
 class CourseBookingApplicationTests {
 	@Autowired
@@ -33,5 +35,16 @@ class CourseBookingApplicationTests {
 		List<Course> courses = courseRepository.findCourseByBookingsCustomerId(1L);
 		System.out.println(courses);
 	}
+	@Test
+	void shouldGetAllCustomersInAGivenTownForAGivenCourse(){
+		List<Customer> customers = customerRepository.findCustomerByBookingsCourseIdAndTown(1L,"Dundee");
+		assertEquals(2,customers.size());
+	}
+	@Test
+	void shouldGetAllCustomersOverACertainAgeInAGivenTownForAGivenCourse(){
+		List<Customer> customers = customerRepository.findCustomerByBookingsCourseIdAndTownAndAgeGreaterThan(1L,"Dundee",30);
+		assertEquals(1, customers.size());
+	}
+
 
 }

@@ -33,8 +33,13 @@ public class CourseController {
     @GetMapping(value = "/courses/{id}/customers")
     public ResponseEntity<List<Customer>> getCourseCustomers(
             @PathVariable Long id,
-            @RequestParam(name = "town",required = false) String town
+            @RequestParam(name = "town",required = false) String town,
+            @RequestParam(name = "age",required = false) Integer age
+
     ){
+        if(age != null && town != null){
+            return new ResponseEntity<>(customerRepository.findCustomerByBookingsCourseIdAndTownAndAgeGreaterThan(id,town,age),HttpStatus.OK);
+        }
         if(town != null){
             return new ResponseEntity<>(customerRepository.findCustomerByBookingsCourseIdAndTown(id,town),HttpStatus.OK);
         }
